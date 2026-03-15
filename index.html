@@ -933,27 +933,27 @@
         <div class="contact-dot">☏</div>
         <div>
           <strong>Téléphone</strong>
-          <span>+212 680 08 6387</span>
+          <span><a href="tel:+212680086387" style="color:rgba(255,255,255,0.8); text-decoration:none;">+212 680 08 6387</a></span>
         </div>
       </div>
       <div class="contact-item">
         <div class="contact-dot">✉</div>
         <div>
           <strong>E-mail</strong>
-          <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8beaf9e1efeaf8eef9fde2e8eef8cbece6eae2e7a5e8e4e6">[email&#160;protected]</a></span>
+          <span><a href="mailto:arjdaservices&#64;gmail&#46;com" style="color:rgba(255,255,255,0.8); text-decoration:none;">arjdaservices&#64;gmail&#46;com</a></span>
         </div>
       </div>
       <div class="contact-item">
         <div class="contact-dot">⊕</div>
         <div>
           <strong>Site Web</strong>
-          <span>www.arjda.com</span>
+          <span><a href="https://www.arjda.com" target="_blank" style="color:rgba(255,255,255,0.8); text-decoration:none;">www.arjda.com</a></span>
         </div>
       </div>
     </div>
     <div class="social-row">
-      <a href="#" class="social-link">Instagram</a>
-      <a href="#" class="social-link">Facebook</a>
+      <a href="https://instagram.com/ARJDAservices" target="_blank" class="social-link">Instagram</a>
+      <a href="https://facebook.com/ARJDAservices" target="_blank" class="social-link">Facebook</a>
     </div>
   </div>
 
@@ -1018,14 +1018,3 @@ form.addEventListener('submit', async function(e) {
   }
 });
 </script>
-function sendMail() {
-  const name = document.querySelector('input[placeholder="Votre nom complet"]').value;
-  const phone = document.querySelector('input[placeholder="+212 6XX XXX XXX"]').value;
-  const email = document.querySelector('input[placeholder="<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fb8d948f899ebb9e969a9297d5989496">[email&#160;protected]</a>"]').value;
-  const service = document.querySelector('select').value;
-  const message = document.querySelector('textarea').value;
-  if (!name || !email || !message) {
-    alert('Veuillez remplir votre nom, email et description du projet.');
-    return;
-  }
-  const subject = encodeURIComponent('Demande de devis – '
