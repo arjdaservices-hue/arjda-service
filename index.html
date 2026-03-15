@@ -935,7 +935,7 @@
         <div class="contact-dot">✉</div>
         <div>
           <strong>E-mail</strong>
-          <span>Contact@arjda.com</span>
+          <span>arjdaservices@gmail.com</span>
         </div>
       </div>
       <div class="contact-item">
@@ -982,16 +982,28 @@
         <label>Description de votre projet</label>
         <textarea placeholder="Décrivez votre projet, la surface approximative, vos attentes..."></textarea>
       </div>
-      <button class="submit-btn">Envoyer ma demande →</button>
+      <button class="submit-btn" onclick="sendMail()">Envoyer ma demande →</button>
     </div>
   </div>
 </section>
 
+<script>
+function sendMail() {
+  const name = document.querySelector('input[placeholder="Votre nom complet"]').value;
+  const phone = document.querySelector('input[placeholder="+212 6XX XXX XXX"]').value;
+  const email = document.querySelector('input[placeholder="votre@email.com"]').value;
+  const service = document.querySelector('select').value;
+  const message = document.querySelector('textarea').value;
+  if (!name || !email || !message) {
+    alert('Veuillez remplir votre nom, email et description du projet.');
+    return;
+  }
+  const subject = encodeURIComponent('Demande de devis – ' + service);
+  const body = encodeURIComponent('Nom: ' + name + '\nTéléphone: ' + phone + '\nEmail: ' + email + '\nService: ' + service + '\n\nDescription:\n' + message);
+  window.location.href = 'mailto:arjdaservices@gmail.com?subject=' + subject + '&body=' + body;
+}
+</script>
+
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">ARJDA <span>service</span></div>
-  <p>© 2024 ARJDA Service · Casablanca, Maroc · Tous droits réservés</p>
-</footer>
-
-</body>
-</html>
+  <div class="footer-logo">ARJDA <span>servic
