@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARJDA Service – Plâtrerie, Peinture & Aménagement Intérieur</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f1419;
+    --cream: #f5f0e8;
+    --sand: #e8dcc8;
+    --blue: #1a3a5c;
+    --accent: #c8a96e;
+    --muted: #8a8070;
+    --white: #fefcf8;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 5%;
+    background: rgba(254,252,248,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--sand);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--blue);
+    letter-spacing: 0.05em;
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex; gap: 2.5rem; list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  .nav-cta {
+    background: var(--blue);
+    color: var(--white) !important;
+    padding: 0.6rem 1.4rem;
+    border-radius: 2px;
+  }
+
+  .nav-cta:hover { background: var(--accent); color: var(--white) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 72px;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8% 6% 8% 8%;
+    background: var(--white);
+    position: relative;
+  }
+
+  .hero-left::after {
+    content: '';
+    position: absolute; right: -1px; top: 10%; bottom: 10%;
+    width: 1px; background: var(--sand);
+  }
+
+  .hero-tag {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+
+  .hero-tag::before {
+    content: ''; display: inline-block;
+    width: 2.5rem; height: 1px; background: var(--accent);
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 1.8rem;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--blue);
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--muted);
+    max-width: 38ch;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-btns {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--blue);
+    color: var(--white);
+    padding: 0.9rem 2.2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none; cursor: pointer;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: background 0.3s, transform 0.2s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--blue);
+    padding: 0.9rem 2.2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid var(--blue); cursor: pointer;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: all 0.3s;
+    display: inline-block;
+  }
+
+  .btn-outline:hover { background: var(--blue); color: var(--white); }
+
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 3.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--sand);
+  }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--blue);
+    display: block;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.3rem;
+    display: block;
+  }
+
+  .hero-right {
+    position: relative;
+    background: var(--cream);
+    overflow: hidden;
+  }
+
+  .hero-right::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--cream) 0%, var(--sand) 100%);
+  }
+
+  .hero-img-grid {
+    position: absolute; inset: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 3px;
+  }
+
+  .hero-img-grid .img-block {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .hero-img-grid .img-block img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: sepia(10%) contrast(1.05);
+    transition: transform 0.6s ease;
+  }
+
+  .hero-img-grid .img-block:hover img { transform: scale(1.05); }
+
+  .hero-img-grid .img-block:first-child {
+    grid-column: 1 / 3;
+  }
+
+  .hero-badge {
+    position: absolute;
+    bottom: 2rem; left: 50%;
+    transform: translateX(-50%);
+    background: var(--white);
+    padding: 0.8rem 1.5rem;
+    border-left: 3px solid var(--accent);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--blue);
+    font-weight: 500;
+    white-space: nowrap;
+    z-index: 2;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  }
+
+  /* SECTIONS */
+  section { padding: 6rem 8%; }
+
+  .section-tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    display: flex; align-items: center; gap: 0.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .section-tag::before {
+    content: ''; display: inline-block;
+    width: 2rem; height: 1px; background: var(--accent);
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+
+  h2 em { font-style: italic; color: var(--blue); }
+
+  .section-intro {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--muted);
+    max-width: 60ch;
+    margin-bottom: 3.5rem;
+  }
+
+  /* SERVICES */
+  #services { background: var(--white); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--sand);
+  }
+
+  .service-card {
+    background: var(--white);
+    padding: 3rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.4s;
+    cursor: default;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute; bottom: 0; left: 0;
+    width: 0; height: 3px;
+    background: var(--accent);
+    transition: width 0.4s ease;
+  }
+
+  .service-card:hover::before { width: 100%; }
+  .service-card:hover { background: #fafaf8; }
+
+  .service-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    font-weight: 300;
+    color: var(--sand);
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    transition: color 0.4s;
+  }
+
+  .service-card:hover .service-num { color: var(--accent); opacity: 0.4; }
+
+  .service-icon {
+    width: 2.5rem; height: 2.5rem;
+    background: var(--blue);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.2rem;
+  }
+
+  .service-icon svg { width: 1.1rem; height: 1.1rem; fill: var(--white); }
+
+  .service-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.8rem;
+    line-height: 1.2;
+  }
+
+  .service-card p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--muted);
+  }
+
+  .service-items {
+    margin-top: 1.5rem;
+    display: flex; flex-direction: column; gap: 0.5rem;
+  }
+
+  .service-item {
+    font-size: 0.82rem;
+    color: var(--blue);
+    display: flex; align-items: center; gap: 0.5rem;
+    font-weight: 500;
+  }
+
+  .service-item::before {
+    content: '→'; color: var(--accent);
+  }
+
+  /* EXPERTISE */
+  #expertise {
+    background: var(--blue);
+    color: var(--white);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  #expertise .section-tag { color: var(--accent); }
+  #expertise .section-tag::before { background: var(--accent); }
+  #expertise h2 { color: var(--white); }
+  #expertise h2 em { color: var(--accent); }
+  #expertise .section-intro { color: rgba(255,255,255,0.65); max-width: none; }
+
+  .expertise-right {
+    display: flex; flex-direction: column; gap: 2rem;
+  }
+
+  .expertise-item {
+    display: flex; gap: 1.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .expertise-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .expertise-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--accent);
+    min-width: 2rem;
+    padding-top: 0.2rem;
+  }
+
+  .expertise-item h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 0.4rem;
+  }
+
+  .expertise-item p {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .certif-badges {
+    display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 2rem;
+  }
+
+  .badge {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: var(--white);
+    padding: 0.4rem 1rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 2px;
+  }
+
+  /* PROCESS */
+  #process { background: var(--cream); }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-top: 3rem;
+    position: relative;
+  }
+
+  .process-steps::before {
+    content: '';
+    position: absolute;
+    top: 2rem; left: 12%; right: 12%;
+    height: 1px; background: var(--accent);
+    opacity: 0.4;
+  }
+
+  .process-step {
+    padding: 0 2rem;
+    text-align: center;
+    position: relative;
+  }
+
+  .step-circle {
+    width: 4rem; height: 4rem;
+    border-radius: 50%;
+    background: var(--white);
+    border: 1px solid var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.5rem;
+    position: relative; z-index: 1;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--blue);
+  }
+
+  .process-step h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .process-step p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  /* ENGAGEMENTS */
+  #engagements { background: var(--white); }
+
+  .engage-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    background: var(--sand);
+    margin-top: 3rem;
+  }
+
+  .engage-card {
+    background: var(--white);
+    padding: 2.5rem;
+    display: flex; gap: 1.5rem;
+  }
+
+  .engage-icon {
+    width: 3rem; height: 3rem; min-width: 3rem;
+    border: 1px solid var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent);
+    font-size: 1.2rem;
+  }
+
+  .engage-card h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+  }
+
+  .engage-card p {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  /* CONTACT */
+  #contact {
+    background: var(--ink);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  #contact .section-tag { color: var(--accent); }
+  #contact .section-tag::before { background: var(--accent); }
+  #contact h2 { color: var(--white); }
+  #contact h2 em { color: var(--accent); }
+  #contact .section-intro { color: rgba(255,255,255,0.55); }
+
+  .contact-details {
+    display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 2.5rem;
+  }
+
+  .contact-item {
+    display: flex; align-items: center; gap: 1rem;
+  }
+
+  .contact-dot {
+    width: 2.5rem; height: 2.5rem; min-width: 2.5rem;
+    border: 1px solid rgba(200,169,110,0.4);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent);
+    font-size: 0.9rem;
+  }
+
+  .contact-item span {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.8);
+  }
+
+  .contact-item strong {
+    display: block;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 0.2rem;
+    font-weight: 400;
+  }
+
+  .social-row {
+    display: flex; gap: 1rem; margin-top: 1rem;
+  }
+
+  .social-link {
+    padding: 0.5rem 1.2rem;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.6);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+
+  .social-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+
+  label {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+
+  input, textarea, select {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--white);
+    padding: 0.85rem 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.3s;
+    border-radius: 2px;
+    resize: vertical;
+  }
+
+  input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.25); }
+
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--accent);
+  }
+
+  select option { background: var(--ink); color: var(--white); }
+
+  textarea { min-height: 100px; }
+
+  .submit-btn {
+    background: var(--accent);
+    color: var(--white);
+    border: none; cursor: pointer;
+    padding: 1rem 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    transition: background 0.3s, transform 0.2s;
+    margin-top: 0.5rem;
+  }
+
+  .submit-btn:hover { background: #b8935a; transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 1.5rem 8%;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .footer-logo span { color: var(--accent); }
+
+  footer p {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.3);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-left > * {
+    opacity: 0;
+    animation: fadeUp 0.7s forwards;
+  }
+
+  .hero-left > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-left > *:nth-child(2) { animation-delay: 0.25s; }
+  .hero-left > *:nth-child(3) { animation-delay: 0.4s; }
+  .hero-left > *:nth-child(4) { animation-delay: 0.55s; }
+  .hero-left > *:nth-child(5) { animation-delay: 0.7s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { height: 50vw; min-height: 280px; }
+    nav .nav-links { display: none; }
+    #expertise, #contact { grid-template-columns: 1fr; gap: 3rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .process-steps { grid-template-columns: 1fr 1fr; }
+    .engage-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">ARJDA <span>service</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#expertise">Expertise</a></li>
+    <li><a href="#process">Processus</a></li>
+    <li><a href="#engagements">Engagements</a></li>
+    <li><a href="#contact" class="nav-cta">Devis Gratuit</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Casablanca, Maroc · Depuis 2024</div>
+    <h1>Votre Expert en<br><em>Plâtrerie, Peinture</em><br>& Aménagement</h1>
+    <p class="hero-desc">Nous transformons vos espaces bruts en intérieurs confortables et esthétiques, avec expertise, qualité et un conseil personnalisé à chaque étape.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">Consultation Gratuite</a>
+      <a href="#services" class="btn-outline">Nos Services</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <span class="stat-num">+30</span>
+        <span class="stat-label">Ans d'expérience</span>
+      </div>
+      <div>
+        <span class="stat-num">+100</span>
+        <span class="stat-label">Projets réalisés</span>
+      </div>
+      <div>
+        <span class="stat-num">2</span>
+        <span class="stat-label">Pays (Maroc & KSA)</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-grid">
+      <div class="img-block">
+        <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=900&q=80" alt="Aménagement intérieur moderne">
+      </div>
+      <div class="img-block">
+        <img src="https://images.unsplash.com/photo-1600210492493-0946911123ea?w=500&q=80" alt="Plâtrerie fine">
+      </div>
+      <div class="img-block">
+        <img src="https://images.unsplash.com/photo-1562438668-bcf0ca6578f0?w=500&q=80" alt="Peinture intérieure">
+      </div>
+    </div>
+    <div class="hero-badge">✦ Qualité · Durabilité · Excellence</div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-tag">Nos Prestations</div>
+  <h2>Ce que nous <em>réalisons</em> pour vous</h2>
+  <p class="section-intro">De la plâtrerie aux finitions décoratives, en passant par la peinture et l'aménagement intérieur, ARJDA couvre l'ensemble de vos besoins.</p>
+
+  <div class="services-grid">
+    <!-- Plâtrerie -->
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M3 3h18v4H3zM3 10h18v4H3zM3 17h18v4H3z"/></svg>
+      </div>
+      <h3>Plâtrerie &amp; Isolation</h3>
+      <p>Nous structurons, isolons et embellissons vos intérieurs, assurant une base solide et performante pour toute rénovation.</p>
+      <div class="service-items">
+        <span class="service-item">Pose de cloisons</span>
+        <span class="service-item">Faux plafonds suspendus</span>
+        <span class="service-item">Isolation thermique &amp; acoustique</span>
+        <span class="service-item">Corniches &amp; moulures décoratives</span>
+      </div>
+    </div>
+
+    <!-- Peinture -->
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M7 14c-1.66 0-3 1.34-3 3 0 1.31-1.16 2-2 2 .92 1.22 2.49 2 4 2 2.21 0 4-1.79 4-4 0-1.66-1.34-3-3-3zm13.71-9.37l-1.34-1.34a1 1 0 00-1.41 0L9 12.25 11.75 15l8.96-8.96a1 1 0 000-1.41z"/></svg>
+      </div>
+      <h3>Peinture &amp; Finitions</h3>
+      <p>Peintures professionnelles à durée de vie supérieure, appliquées par des experts pour un rendu parfait et durable.</p>
+      <div class="service-items">
+        <span class="service-item">Peintures mates, satinées, velours</span>
+        <span class="service-item">Préparation des supports</span>
+        <span class="service-item">Conseil en couleurs personnalisé</span>
+        <span class="service-item">Peintures techniques anti-humidité</span>
+      </div>
+    </div>
+
+    <!-- Aménagement -->
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+      </div>
+      <h3>Aménagement Intérieur</h3>
+      <p>L'art d'optimiser et personnaliser vos espaces de vie selon vos goûts, intégrant les tendances actuelles.</p>
+      <div class="service-items">
+        <span class="service-item">Matériaux naturels (bois, rotin)</span>
+        <span class="service-item">Mobilier multifonctionnel</span>
+        <span class="service-item">Design tendance &amp; contemporain</span>
+        <span class="service-item">Solutions durables &amp; éco-responsables</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERTISE -->
+<section id="expertise">
+  <div>
+    <div class="section-tag">Chef Technique</div>
+    <h2>Said Arajadal,<br><em>30 ans</em> de maîtrise</h2>
+    <p class="section-intro">Notre équipe d'artisans qualifiés est formée aux techniques traditionnelles et modernes. SAID ARAJADAL a dirigé des projets d'exception, dont les travaux du Palais Royal en Arabie Saoudite.</p>
+    <div class="certif-badges">
+      <span class="badge">RGE</span>
+      <span class="badge">Qualibat</span>
+      <span class="badge">Éco-conception</span>
+    </div>
+  </div>
+  <div class="expertise-right">
+    <div class="expertise-item">
+      <span class="expertise-num">I.</span>
+      <div>
+        <h4>Techniques traditionnelles &amp; modernes</h4>
+        <p>Maîtrise des techniques de plâtrerie fine, corniches classiques, enduits décoratifs et systèmes secs contemporains.</p>
+      </div>
+    </div>
+    <div class="expertise-item">
+      <span class="expertise-num">II.</span>
+      <div>
+        <h4>Projets d'exception internationaux</h4>
+        <p>Expérience sur des chantiers de très haute envergure avec finitions luxueuses et standards de qualité exceptionnels.</p>
+      </div>
+    </div>
+    <div class="expertise-item">
+      <span class="expertise-num">III.</span>
+      <div>
+        <h4>Peintures à durabilité +12 ans</h4>
+        <p>Utilisation de produits professionnels à fort pouvoir couvrant, faible odeur et stabilité chromatique dans le temps.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="section-tag">Notre Méthode</div>
+  <h2>Un processus <em>clair</em> et transparent</h2>
+  <p class="section-intro">Du premier contact à la livraison finale, nous vous accompagnons à chaque étape avec rigueur et transparence.</p>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="step-circle">1</div>
+      <h4>Consultation</h4>
+      <p>Rencontre gratuite pour comprendre votre projet, vos attentes et votre budget.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-circle">2</div>
+      <h4>Devis Personnalisé</h4>
+      <p>Proposition détaillée avec choix des matériaux, planning et tarification transparente.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-circle">3</div>
+      <h4>Réalisation</h4>
+      <p>Exécution par nos artisans qualifiés dans le respect strict des délais convenus.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-circle">4</div>
+      <h4>Livraison</h4>
+      <p>Contrôle qualité final, nettoyage complet et remise des clés à votre satisfaction.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ENGAGEMENTS -->
+<section id="engagements">
+  <div class="section-tag">Garanties</div>
+  <h2>Nos <em>engagements</em> qualité</h2>
+  <div class="engage-grid">
+    <div class="engage-card">
+      <div class="engage-icon">⬡</div>
+      <div>
+        <h4>Matériaux Professionnels</h4>
+        <p>Exclusivement des peintures et matériaux professionnels, sélectionnés pour leur pouvoir couvrant supérieur et faible impact environnemental.</p>
+      </div>
+    </div>
+    <div class="engage-card">
+      <div class="engage-icon">◷</div>
+      <div>
+        <h4>Respect des Délais</h4>
+        <p>Plannings établis scrupuleusement respectés. Nous vous garantissons une livraison dans les délais convenus, sans stress.</p>
+      </div>
+    </div>
+    <div class="engage-card">
+      <div class="engage-icon">◈</div>
+      <div>
+        <h4>Durabilité +12 ans</h4>
+        <p>Nos peintures professionnelles offrent une durée de vie bien supérieure avec une meilleure stabilité des couleurs dans le temps.</p>
+      </div>
+    </div>
+    <div class="engage-card">
+      <div class="engage-icon">◎</div>
+      <div>
+        <h4>Sécurité &amp; Propreté</h4>
+        <p>Équipements de protection individuelle, Plan Particulier de Protection et tri des déchets pour une valorisation responsable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div>
+    <div class="section-tag">Contact</div>
+    <h2>Concrétisons <em>ensemble</em><br>votre projet</h2>
+    <p class="section-intro">Contactez-nous pour une consultation gratuite et un devis personnalisé, sans engagement.</p>
+    <div class="contact-details">
+      <div class="contact-item">
+        <div class="contact-dot">☏</div>
+        <div>
+          <strong>Téléphone</strong>
+          <span>+212 680 08 6387</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-dot">✉</div>
+        <div>
+          <strong>E-mail</strong>
+          <span>Contact@arjda.com</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-dot">⊕</div>
+        <div>
+          <strong>Site Web</strong>
+          <span>www.arjda.com</span>
+        </div>
+      </div>
+    </div>
+    <div class="social-row">
+      <a href="#" class="social-link">Instagram</a>
+      <a href="#" class="social-link">Facebook</a>
+    </div>
+  </div>
+
+  <div>
+    <div class="contact-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Prénom &amp; Nom</label>
+          <input type="text" placeholder="Votre nom complet">
+        </div>
+        <div class="form-group">
+          <label>Téléphone</label>
+          <input type="tel" placeholder="+212 6XX XXX XXX">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>E-mail</label>
+        <input type="email" placeholder="votre@email.com">
+      </div>
+      <div class="form-group">
+        <label>Type de service</label>
+        <select>
+          <option value="">Sélectionnez un service</option>
+          <option>Plâtrerie &amp; Isolation</option>
+          <option>Peinture &amp; Finitions</option>
+          <option>Aménagement Intérieur</option>
+          <option>Projet complet</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Description de votre projet</label>
+        <textarea placeholder="Décrivez votre projet, la surface approximative, vos attentes..."></textarea>
+      </div>
+      <button class="submit-btn">Envoyer ma demande →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">ARJDA <span>service</span></div>
+  <p>© 2024 ARJDA Service · Casablanca, Maroc · Tous droits réservés</p>
+</footer>
+
+</body>
+</html>
